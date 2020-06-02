@@ -1,18 +1,26 @@
-const http = require('http');
+const http = require("http");
 const server = http.createServer();
 
-server.on('request', (req, res) => {
-    if (req.method === 'POST' && req.url == '/echo') {
+server.on("request", (req, res) => {
+    if (req.method === "POST" && req.url == "/echo") {
         let body = [];
 
-        res
-            .on('data', chunk => {
+        req
+            .on("error", (err) => {
+                console.error(err);
+                console.log("error");
+            })
+            .on("data", (chunk) => {
                 body.push(chunk);
             })
-            .on('end', () => {
-                res.writeHead(200, {'Content-Type': 'text/plain'});
+            .on("end", () => {
+                res.writeHead(200, { "Content-Type": "text/plain" });
                 body = Buffer.concat(body).toString();
-                res.end(body);
+                //fecha de nacimiento yyyy/mm/dd
+                let date = new Date(body);
+                let day = date.getDay();
+                let weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                res.end(`You were born in the day: '${weekDays[day]}'`);
             });
     } else {
         res.statusCode = 404;
