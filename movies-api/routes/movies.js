@@ -77,6 +77,21 @@ function moviesApi(app) {
             next(err);
         }
     });
+
+    router.patch("/:movieId", async function (req, res, next) {
+        const { movieId } = req.params;
+        const { body: movie } = req;
+        try {
+            const replacedMovieId = await moviesService.replaceMovie({ movieId, movie });
+
+            res.status(200).json({
+                data: replacedMovieId,
+                message: 'movie replaced'
+            })
+        } catch (err) {
+            next(err);
+        }
+    });
 }
 
 module.exports = moviesApi;
