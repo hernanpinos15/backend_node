@@ -24,4 +24,4 @@ describe("services - movies", function() {
             assert.deepEqual(result, expected);
         });
     });
-})
+});
