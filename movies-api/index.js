@@ -8,6 +8,7 @@ const {
     wrapErrors
 } = require('./utils/middleware/errorHandlers.js');
 const notFoundHandler = require('./utils/middleware/notFoundHandler.js');
+const debug = require('debug')('app:server');
 
 //body parse
 app.use(express.json());
@@ -24,5 +25,6 @@ app.use(wrapErrors);
 app.use(errorHandler);
 
 app.listen(config.port, function () {
-    console.log(`Listening http://localhost:${config.port}`);
+    // console.log(`Listening http://localhost:${config.port}`);
+    debug(`Listening http://localhost:${config.port}`);
 });
