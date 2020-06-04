@@ -21,8 +21,9 @@ function moviesApi(app) {
         }
     });
 
-    router.get("/:movieID", async function (req, res, next) {
+    router.get("/:movieId", async function (req, res, next) {
         const { movieId } = req.params;
+
         try {
             const movies = await moviesService.getMovie({ movieId });
 
@@ -78,20 +79,20 @@ function moviesApi(app) {
         }
     });
 
-    router.patch("/:movieId", async function (req, res, next) {
-        const { movieId } = req.params;
-        const { body: movie } = req;
-        try {
-            const replacedMovieId = await moviesService.replaceMovie({ movieId, movie });
+    // router.patch("/:movieId", async function (req, res, next) {
+    //     const { movieId } = req.params;
+    //     const { body: movie } = req;
+    //     try {
+    //         const replacedMovieId = await moviesService.replaceMovie({ movieId, movie });
 
-            res.status(200).json({
-                data: replacedMovieId,
-                message: 'movie replaced'
-            })
-        } catch (err) {
-            next(err);
-        }
-    });
+    //         res.status(200).json({
+    //             data: replacedMovieId,
+    //             message: 'movie replaced'
+    //         })
+    //     } catch (err) {
+    //         next(err);
+    //     }
+    // });
 }
 
 module.exports = moviesApi;
