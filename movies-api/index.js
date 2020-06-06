@@ -9,7 +9,7 @@ const {
 } = require('./utils/middleware/errorHandlers.js');
 const notFoundHandler = require('./utils/middleware/notFoundHandler.js');
 const debug = require('debug')('app:server');
-console.log(`DEV: ${config.dev} - START: ${config.start}`);
+// console.log(`DEV: ${config.dev} - START: ${config.start}`);
 //body parse
 app.use(express.json());
 
